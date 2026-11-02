@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, HttpUrl
 
 app = FastAPI()
@@ -22,3 +23,11 @@ def create_link(data: LinkCreate):
     code = "test123"
     links_db[code] = str(data.url)
     return {"original_url": data.url, "code": "test123", "short_url": f"http://localhost:8000/{code}"}
+
+@app.get("/{code}")
+def redirect(code: str):
+    found = links_db.get(code)
+    if not found:
+        raise HTTPException(status_code=404, detail="Link not found")
+    return RedirectResponse(url=found,status_code=302)
+    
