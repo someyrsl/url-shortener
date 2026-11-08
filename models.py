@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime, func
-from sqlalchemy.orm import declarative_base
-Base = declarative_base()
+from database import Base
 
 class Link(Base):
     __tablename__ = "links"
