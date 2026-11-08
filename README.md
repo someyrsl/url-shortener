@@ -80,6 +80,14 @@ uvicorn main:app --reload
 
 The API is available at `http://localhost:8000`, interactive docs at `http://localhost:8000/docs`.
 
+### Run tests
+
+```bash
+pytest -v
+```
+
+Tests run against an in-memory SQLite database, so PostgreSQL is not required.
+
 ## API
 
 | Method | Path | Description |
@@ -140,5 +148,5 @@ Unknown codes return `404`.
 - [ ] Link expiration (`410 Gone`)
 - [ ] Redis cache for popular links
 - [ ] Rate limiting
-- [ ] Tests (pytest)
+- [x] Tests (pytest)
 - [ ] Docker Compose setup
